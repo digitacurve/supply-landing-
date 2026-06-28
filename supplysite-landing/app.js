@@ -138,6 +138,46 @@ function initCallbackForm() {
   const form = document.getElementById('callback-form-element');
   if (!form) return;
 
+  // Enforce validation on the primary WhatsApp button click
+  const whatsappHeroBtn = document.querySelector('.btn-whatsapp-primary');
+  if (whatsappHeroBtn) {
+    whatsappHeroBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('hero-name-input');
+      const phoneInput = document.getElementById('hero-phone-input');
+      const materialSelect = document.getElementById('hero-material-select');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const phone = phoneInput ? phoneInput.value.trim() : '';
+      const material = materialSelect ? materialSelect.value : 'Cement & TMT Saria';
+
+      if (!name) {
+        alert('Please enter your name first.');
+        if (nameInput) nameInput.focus();
+        return;
+      }
+
+      if (!phone) {
+        alert('Please enter your WhatsApp mobile number first.');
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+
+      const phoneRegex = /^[5-9]\d{9}$/; // Indian mobile numbers start with 5, 6, 7, 8, 9
+      if (!phoneRegex.test(phone)) {
+        alert('Please enter a valid 10-digit mobile number.');
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+
+      const textMessage = `Hi SiteSupply, I want to get today's wholesale price list via WhatsApp.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Material Needed:* ${material}\n\nPlease share the latest price sheet.`;
+      const targetUrl = `https://api.whatsapp.com/send/?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(textMessage)}&type=phone_number&app_absent=0`;
+
+      window.location.href = targetUrl;
+    });
+  }
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -149,12 +189,25 @@ function initCallbackForm() {
     const phone = phoneInput ? phoneInput.value.trim() : '';
     const material = materialSelect ? materialSelect.value : 'Cement & TMT Saria';
 
-    if (!name || !phone) {
-      alert('Please fill out all required fields.');
+    if (!name) {
+      alert('Please enter your name first.');
+      if (nameInput) nameInput.focus();
       return;
     }
 
-    // High conversion path: Redirect to WhatsApp with filled details as fallback/confirmation
+    if (!phone) {
+      alert('Please enter your mobile number first.');
+      if (phoneInput) phoneInput.focus();
+      return;
+    }
+
+    const phoneRegex = /^[5-9]\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      alert('Please enter a valid 10-digit mobile number.');
+      if (phoneInput) phoneInput.focus();
+      return;
+    }
+
     const textMessage = `Hi SiteSupply, I've requested a callback via your website.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Material Needed:* ${material}\n\nPlease contact me at your earliest convenience with pricing details.`;
     const targetUrl = `https://api.whatsapp.com/send/?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(textMessage)}&type=phone_number&app_absent=0`;
 

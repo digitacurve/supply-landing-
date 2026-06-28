@@ -193,8 +193,10 @@ img {
 .hero-section {
   position: relative;
   background-color: #f8fafc; /* clean off-white background */
-  background-image: radial-gradient(var(--color-slate-200) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: linear-gradient(rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.94)), url('_images/hero_b2b_wholesale_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--color-slate-950);
   padding-top: 4.5rem;
   padding-bottom: 5rem;
