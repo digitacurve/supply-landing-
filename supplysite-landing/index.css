@@ -2093,6 +2093,25 @@ img {
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .header-logo img {
+    height: 1.5rem;
+  }
+  .header-cta-btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
+  }
+  .hero-headline {
+    font-size: 1.45rem;
+  }
+  .hero-subheadline {
+    font-size: 0.825rem;
+    line-height: 1.4;
+    margin-bottom: 0.85rem;
+  }
   .hero-usps-list li {
     font-size: 0.8rem;
     gap: 0.5rem;
@@ -2119,5 +2138,16 @@ img {
   }
   .hero-cement-sub {
     font-size: 0.65rem;
+  }
+  .hero-card {
+    padding: 1.25rem 1rem;
+    gap: 1rem;
+  }
+  .hero-card-title {
+    font-size: 1.15rem;
+  }
+  .hero-card-subtitle {
+    font-size: 0.75rem;
+    margin-top: -0.75rem;
   }
 }
